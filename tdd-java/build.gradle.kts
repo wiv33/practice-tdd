@@ -10,7 +10,9 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter:5.5.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.5.0") {
+        exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+    }
 }
 
 configure<JavaPluginConvention> {
