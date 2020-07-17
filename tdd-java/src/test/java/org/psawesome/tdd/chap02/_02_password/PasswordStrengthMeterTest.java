@@ -1,5 +1,6 @@
 package org.psawesome.tdd.chap02._02_password;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,7 +24,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @since 20. 7. 17. Friday
  */
 public class PasswordStrengthMeterTest {
+
   @Test
+  @DisplayName("모든 암호를 만족할 때 Strong")
   void meetsAllCriteria_Then_Strong() {
     var meter = new PasswordStrengthMeter();
 
@@ -32,6 +35,15 @@ public class PasswordStrengthMeterTest {
 
     var result2 = meter.meter("abc1!Add");
     assertEquals(PasswordStrength.STRONG, result2);
+
+  }
+
+  @Test
+  @DisplayName("길이가 부족해서 Normal")
+  void meetsOtherCriteria_expect_for_Length_Then_Normal() {
+    PasswordStrengthMeter meter = new PasswordStrengthMeter();
+    PasswordStrength result = meter.meter("ab12!@A");
+    assertEquals(PasswordStrength.NORMAL, result);
 
   }
 }

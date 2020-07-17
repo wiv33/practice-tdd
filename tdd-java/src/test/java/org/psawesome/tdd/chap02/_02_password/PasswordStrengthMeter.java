@@ -13,6 +13,7 @@ package org.psawesome.tdd.chap02._02_password;
  */
 public class PasswordStrengthMeter {
   public PasswordStrength meter(String s) {
+    if (s.length() < 8) return PasswordStrength.NORMAL;
     return PasswordStrength.STRONG;
   }
 }
