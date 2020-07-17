@@ -41,8 +41,8 @@ public class PasswordStrengthMeterTest {
   @Test
   @DisplayName("길이가 부족해서 Normal")
   void meetsOtherCriteria_expect_for_Length_Then_Normal() {
-    PasswordStrengthMeter meter = new PasswordStrengthMeter();
-    PasswordStrength result = meter.meter("ab12!@A");
+    var meter = new PasswordStrengthMeter();
+    var result = meter.meter("ab12!@A");
     assertEquals(PasswordStrength.NORMAL, result);
 
   }
