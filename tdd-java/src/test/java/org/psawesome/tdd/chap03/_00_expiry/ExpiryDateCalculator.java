@@ -15,19 +15,22 @@ import java.util.Objects;
  * @since 20. 7. 18. Saturday
  */
 public class ExpiryDateCalculator {
+  int addedMonths = 1;
+
   public LocalDate calculateExpiryDate(PayData payData) {
+
     if (Objects.nonNull(payData.getFirstBillingDate())) {
 //      return this.firstTestSuccess(payData);
       LocalDate candidateExp = secondTestSuccess(payData);
       if (candidateExp != null) return candidateExp;
     }
-    return payData.getBillingDate().plusMonths(1);
+    return payData.getBillingDate().plusMonths(addedMonths);
   }
 
   // 두 번째 - 상수를 유연한 로직으로 처리
   private LocalDate secondTestSuccess(PayData payData) {
     // V - 후보 만료일 구함
-    LocalDate candidateExp = payData.getBillingDate().plusMonths(1);
+    LocalDate candidateExp = payData.getBillingDate().plusMonths(addedMonths);
 
     // V - 첫 납부일의 일자와 후보 만료일의 일자가 다르면
     if (payData.getFirstBillingDate().getDayOfMonth() != candidateExp.getDayOfMonth()) {
