@@ -3,7 +3,6 @@ package org.psawesome.tdd.chap02._02_password;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.DisabledOnOs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -33,7 +32,7 @@ public class PasswordStrengthMeterTest {
   }
 
   @Test
-  @DisplayName("모든 암호를 만족할 때 Strong")
+  @DisplayName("첫 번째 - 모든 암호를 만족할 때 Strong")
   void meetsAllCriteria_Then_Strong() {
     assertStrength("ab12!@AB", PasswordStrength.STRONG);
     assertStrength("abc1!Add", PasswordStrength.STRONG);
@@ -41,41 +40,53 @@ public class PasswordStrengthMeterTest {
 
 
   @Test
-  @DisplayName("길이가 부족해서 Normal")
+  @DisplayName("두 번째 - 길이가 부족해서 Normal")
   void meetsOtherCriteria_expect_for_Length_Then_Normal() {
     assertStrength("ab12!@A", PasswordStrength.NORMAL);
     assertStrength("Ab12!c", PasswordStrength.NORMAL);
   }
 
   @Test
-  @DisplayName("숫자는 없고 나머지는 만족해서 Normal")
+  @DisplayName("세 번째 - 숫자는 없고 나머지는 만족해서 Normal")
   void testMeetsOtherCriteria_expect_for_number_Then_Normal() {
     assertStrength("ab!@Abqwer", PasswordStrength.NORMAL);
   }
 
   @Test
-  @DisplayName("null, empty 입력 시 INVALID")
+  @DisplayName("네 번째 - 대문자를 포함하지 ㅏㅇㄶ고 나머지 조건을 충족하는 경우")
+  void testMeetsOtherCriteria_expect_for_Uppercase_Then_Normal() {
+    assertStrength("ab12!@df", PasswordStrength.NORMAL);
+  }
+
+  @Test
+  @DisplayName("다섯 번째 - null, empty 입력 시 INVALID")
   void testNullInput_Then_Invalid() {
     assertStrength(null, PasswordStrength.INVALID);
     assertStrength("", PasswordStrength.INVALID);
   }
 
   @Test
-  @DisplayName("한 가지 조건만 충족하거나 모든 조건을 충족하지 않은 경우 테스트")
+  @DisplayName("여섯 번째 - 길이가 8글자 이상인 조건만 충족하는 경우")
   void test() {
     assertStrength("abdefegi", PasswordStrength.WEAK);
-    assertStrength("abs@Efd", PasswordStrength.WEAK);
   }
 
   @Test
-  @DisplayName("숫자로만 작성된 경우")
+  @DisplayName("일곱 번째 - 숫자로만 작성된 경우")
   void testOnlyNumberCriteria_Then_weak() {
     assertStrength("12345", PasswordStrength.WEAK);
   }
 
   @Test
+  @DisplayName("여덟 번째 - 대문자만 작성된 경우")
   void testMeetOnlyUppercaseCriteria_Then_Weak() {
     assertStrength("ABSTREW", PasswordStrength.WEAK);
+  }
+
+  @Test
+  @DisplayName("아홉 번째 - 아무 조건도 충족하지 않은 경우")
+  void testMeetsNoCriteria_Then_Weak() {
+    assertStrength("abc", PasswordStrength.WEAK);
   }
 
   private void assertStrength(String s, PasswordStrength strong) {
