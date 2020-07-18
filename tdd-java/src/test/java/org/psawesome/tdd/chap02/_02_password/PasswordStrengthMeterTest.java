@@ -36,7 +36,6 @@ public class PasswordStrengthMeterTest {
   void meetsAllCriteria_Then_Strong() {
     assertStrength("ab12!@AB", PasswordStrength.STRONG);
     assertStrength("abc1!Add", PasswordStrength.STRONG);
-
   }
 
   private void assertStrength(String s, PasswordStrength strong) {
@@ -55,5 +54,12 @@ public class PasswordStrengthMeterTest {
   @DisplayName("숫자는 없고 나머지는 만족해서 Normal")
   void testMeetsOtherCriteria_expect_for_number_Then_Normal() {
     assertStrength("ab!@Abqwer", PasswordStrength.NORMAL);
+  }
+
+  @Test
+  @DisplayName("null, empty 입력 시 INVALID")
+  void testNullInput_Then_Invalid() {
+    assertStrength(null, PasswordStrength.INVALID);
+    assertStrength("", PasswordStrength.INVALID);
   }
 }

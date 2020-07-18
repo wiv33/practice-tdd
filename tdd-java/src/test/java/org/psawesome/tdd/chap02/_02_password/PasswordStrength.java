@@ -12,5 +12,5 @@ package org.psawesome.tdd.chap02._02_password;
  * @since 20. 7. 17. Friday
  */
 public enum PasswordStrength {
-  STRONG, NORMAL
+  STRONG, NORMAL, INVALID
 }
