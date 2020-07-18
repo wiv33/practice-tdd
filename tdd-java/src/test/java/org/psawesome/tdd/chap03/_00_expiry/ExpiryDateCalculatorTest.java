@@ -69,7 +69,7 @@ public class ExpiryDateCalculatorTest {
   }
 
   @Test
-  @DisplayName("세 번째 테스트 - 예외 상황 테스트 추가")
+  @DisplayName("세 번째 테스트 - 예외 상황 테스트 추가 (서비스일 연장하기)")
   void test_첫_납부일과_만료일_일자가_다를_때_만원_납부() {
     PayData payData = PayData.builder()
             .firstBillingDate(LocalDate.of(2019, 1, 31))
