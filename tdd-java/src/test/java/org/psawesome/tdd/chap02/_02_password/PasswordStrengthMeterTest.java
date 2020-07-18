@@ -3,6 +3,7 @@ package org.psawesome.tdd.chap02._02_password;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -38,10 +39,6 @@ public class PasswordStrengthMeterTest {
     assertStrength("abc1!Add", PasswordStrength.STRONG);
   }
 
-  private void assertStrength(String s, PasswordStrength strong) {
-    var result = meter.meter(s);
-    assertEquals(strong, result);
-  }
 
   @Test
   @DisplayName("길이가 부족해서 Normal")
@@ -61,5 +58,28 @@ public class PasswordStrengthMeterTest {
   void testNullInput_Then_Invalid() {
     assertStrength(null, PasswordStrength.INVALID);
     assertStrength("", PasswordStrength.INVALID);
+  }
+
+  @Test
+  @DisplayName("한 가지 조건만 충족하거나 모든 조건을 충족하지 않은 경우 테스트")
+  void test() {
+    assertStrength("abdefegi", PasswordStrength.WEAK);
+    assertStrength("abs@Efd", PasswordStrength.WEAK);
+  }
+
+  @Test
+  @DisplayName("숫자로만 작성된 경우")
+  void testOnlyNumberCriteria_Then_weak() {
+    assertStrength("12345", PasswordStrength.WEAK);
+  }
+
+  @Test
+  void testMeetOnlyUppercaseCriteria_Then_Weak() {
+    assertStrength("ABSTREW", PasswordStrength.WEAK);
+  }
+
+  private void assertStrength(String s, PasswordStrength strong) {
+    var result = meter.meter(s);
+    assertEquals(strong, result);
   }
 }
