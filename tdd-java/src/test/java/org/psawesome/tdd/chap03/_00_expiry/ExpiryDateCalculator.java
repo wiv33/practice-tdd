@@ -14,7 +14,7 @@ import java.time.LocalDate;
  * @since 20. 7. 18. Saturday
  */
 public class ExpiryDateCalculator {
-  public LocalDate calculateExpiryDate(LocalDate billingDate, int payAmount) {
-    return billingDate.plusMonths(1);
+  public LocalDate calculateExpiryDate(PayData payDate) {
+    return payDate.getBillingDate().plusMonths(1);
   }
 }

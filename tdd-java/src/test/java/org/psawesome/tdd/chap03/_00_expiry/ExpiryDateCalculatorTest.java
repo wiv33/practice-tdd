@@ -29,13 +29,17 @@ public class ExpiryDateCalculatorTest {
   @DisplayName("첫 번째 테스트 - input 납부금, 납부일, output 서비스 만료일")
   void test_만원_납부하면_한달_뒤가_만료일() {
     assertExpiryDate(
-            LocalDate.of(2020, 7, 1),
-            10_000,
+            PayData.builder()
+                    .billingDate(LocalDate.of(2020, 7, 1))
+                    .payAmount(10_000)
+                    .build(),
             LocalDate.of(2020, 8, 1)
     );
     // 예를 추가하면서 구현을 일반화
-    assertExpiryDate(LocalDate.of(2020, 7, 6),
-            10_000,
+    assertExpiryDate(PayData.builder()
+                    .billingDate(LocalDate.of(2020, 7, 6))
+                    .payAmount(10_000)
+                    .build(),
             LocalDate.of(2020, 8, 6)
     );
   }
@@ -43,24 +47,32 @@ public class ExpiryDateCalculatorTest {
   @Test
   @DisplayName("두 번째 테스트 - 예외 상황")
   void 납부일과_한달_뒤_일자가_같지_않음() {
-    assertExpiryDate(LocalDate.of(2019, 1, 31),
-            10_000,
+    assertExpiryDate(PayData.builder()
+                    .billingDate(LocalDate.of(2019, 1, 31))
+                    .payAmount(10_000)
+                    .build(),
             LocalDate.of(2019, 2, 28)
     );
-    assertExpiryDate(LocalDate.of(2019, 5, 31),
-            10_000,
+    assertExpiryDate(PayData.builder()
+                    .billingDate(LocalDate.of(2019, 5, 31))
+                    .payAmount(10_000)
+                    .build(),
             LocalDate.of(2019, 6, 30)
     );
-    assertExpiryDate(LocalDate.of(2020, 1, 31),
-            10_000,
+
+    assertExpiryDate(
+            PayData.builder().billingDate(LocalDate.of(2020, 1, 31))
+                    .payAmount(10_000)
+                    .build(),
             LocalDate.of(2020, 2, 29)
     );
   }
 
-  private void assertExpiryDate(LocalDate billingDate, int payAmount, LocalDate expectedExpiryDate) {
+  private void assertExpiryDate(PayData payData, LocalDate expectedExpiryDate) {
     ExpiryDateCalculator cal = new ExpiryDateCalculator();
-    LocalDate expiryDate = cal.calculateExpiryDate(billingDate, payAmount);
+    LocalDate expiryDate = cal.calculateExpiryDate(payData);
     assertEquals(expectedExpiryDate, expiryDate);
   }
+
 
 }
