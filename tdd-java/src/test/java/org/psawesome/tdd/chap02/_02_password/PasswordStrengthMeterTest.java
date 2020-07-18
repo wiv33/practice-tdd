@@ -44,6 +44,15 @@ public class PasswordStrengthMeterTest {
     var meter = new PasswordStrengthMeter();
     var result = meter.meter("ab12!@A");
     assertEquals(PasswordStrength.NORMAL, result);
+    var result2 = meter.meter("Ab12!c");
+    assertEquals(PasswordStrength.NORMAL, result2);
+  }
 
+  @Test
+  @DisplayName("숫자는 없고 나머지는 만족해서 Normal")
+  void testMeetsOtherCriteria_expect_for_number_Then_Normal() {
+    var meter = new PasswordStrengthMeter();
+    var result = meter.meter("ab!@Abqwer");
+    assertEquals(PasswordStrength.NORMAL, result);
   }
 }
