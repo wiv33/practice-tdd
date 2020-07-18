@@ -12,3 +12,7 @@ class _PasswordStrength:
     @constant
     def STRONG(self):
         return "STRONG"
+
+    @constant
+    def NORMAL(self):
+        return "NORMAL"

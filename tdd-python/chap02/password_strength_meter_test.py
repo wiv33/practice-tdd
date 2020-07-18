@@ -12,6 +12,15 @@ class MyTestCase(unittest.TestCase):
         result = meter.meter("ab!@#AB2")
         self.assertEqual(_PasswordStrength().STRONG, result)
 
+        result2 = meter.meter("abc12@3D")
+        self.assertEqual(_PasswordStrength().STRONG, result2)
+
+    # 암호 조건 중 2개를 충족하므로 NORMAL
+    def test_meets_other_criteria_expect_for_length_then_normal(self):
+        meter = PasswordStrengthMeter()
+        result = meter.meter("ab12!@A")
+        self.assertEqual(_PasswordStrength().NORMAL, result)
+
 
 if __name__ == '__main__':
     unittest.main()
