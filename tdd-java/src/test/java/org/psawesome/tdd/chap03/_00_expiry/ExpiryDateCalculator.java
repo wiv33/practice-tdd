@@ -24,10 +24,29 @@ public class ExpiryDateCalculator {
     if (Objects.nonNull(payData.getFirstBillingDate())) {
 //      return this.firstTestSuccess(payData);
 //      LocalDate candidateExp = secondTestSuccess(payData);
-      LocalDate candidateExp = this.thirdTestSuccess(payData);
-      if (candidateExp != null) return candidateExp;
+//      LocalDate candidateExp = this.thirdTestSuccess(payData);
+//      if (candidateExp != null) return candidateExp;
+
+      /* last refactoring */
+      return expiryDateUsingFirstBillingDate(payData, addedMonths);
+    } else {
+      return payData.getBillingDate().plusMonths(addedMonths);
     }
-    return payData.getBillingDate().plusMonths(addedMonths);
+  }
+
+  private LocalDate expiryDateUsingFirstBillingDate(PayData payData, int addedMonths) {
+    LocalDate candidateExp = payData.getBillingDate().plusMonths(addedMonths);
+
+    final int dayOfFirstBilling = payData.getFirstBillingDate().getDayOfMonth();
+    if (dayOfFirstBilling != candidateExp.getDayOfMonth()) {
+      final int dayLenOfCandiMon = YearMonth.from(candidateExp).lengthOfMonth();
+      if (dayLenOfCandiMon < dayOfFirstBilling) {
+        return candidateExp.withDayOfMonth(dayLenOfCandiMon);
+      }
+      return candidateExp.withDayOfMonth(dayOfFirstBilling);
+    } else {
+      return candidateExp;
+    }
   }
 
   private LocalDate thirdTestSuccess(PayData payData) {
