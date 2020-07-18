@@ -1,6 +1,7 @@
 package org.psawesome.tdd.chap03._00_expiry;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.Objects;
 
 /**
@@ -22,11 +23,28 @@ public class ExpiryDateCalculator {
 
     if (Objects.nonNull(payData.getFirstBillingDate())) {
 //      return this.firstTestSuccess(payData);
-      LocalDate candidateExp = secondTestSuccess(payData);
+//      LocalDate candidateExp = secondTestSuccess(payData);
+      LocalDate candidateExp = this.thirdTestSuccess(payData);
       if (candidateExp != null) return candidateExp;
     }
     return payData.getBillingDate().plusMonths(addedMonths);
   }
+
+  private LocalDate thirdTestSuccess(PayData payData) {
+    LocalDate candidateExp = payData.getBillingDate().plusMonths(addedMonths);
+
+    // V - 첫 납부일의 일자와 후보 만료일의 일자가 다르면
+    if (payData.getFirstBillingDate().getDayOfMonth() != candidateExp.getDayOfMonth()) {
+      // V - 첫 번째 납부일의 만료일로 적용해서 반환한다.
+      if (YearMonth.from(candidateExp).lengthOfMonth() < payData.getFirstBillingDate().getDayOfMonth()) {
+        return candidateExp.withDayOfMonth(YearMonth.from(candidateExp).lengthOfMonth());
+      }
+      return candidateExp.withDayOfMonth(payData.getFirstBillingDate().getDayOfMonth());
+    }
+
+    return null;
+  }
+
 
   // 두 번째 - 상수를 유연한 로직으로 처리
   private LocalDate secondTestSuccess(PayData payData) {
