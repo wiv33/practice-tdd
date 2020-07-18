@@ -49,8 +49,8 @@ public class ExpiryDateCalculator {
     }
   }
 
-  private int lastDayOfMonth(LocalDate candidateExp) {
-    return YearMonth.from(candidateExp).lengthOfMonth();
+  private int lastDayOfMonth(LocalDate date) {
+    return YearMonth.from(date).lengthOfMonth();
   }
 
   private boolean isSameDayOfMonth(int date1, LocalDate date2) {
