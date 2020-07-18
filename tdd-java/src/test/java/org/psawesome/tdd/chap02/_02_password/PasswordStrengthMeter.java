@@ -10,6 +10,7 @@ import java.util.Arrays;
  * input:
  * output:
  * }
+ * 교훈: 구현하기 쉬운 것부터 찾아서 tdd 리스트를 만든다.
  * @see
  * @since 20. 7. 17. Friday
  */
