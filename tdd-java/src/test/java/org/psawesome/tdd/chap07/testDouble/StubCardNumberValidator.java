@@ -15,9 +15,15 @@ import java.util.Objects;
  */
 public class StubCardNumberValidator extends CardNumberValidator {
   private String invalidNo;
+  private String theftNo;
 
   public StubCardNumberValidator setInvalidNo(String invalidNo) {
     this.invalidNo = invalidNo;
+    return this;
+  }
+
+  public StubCardNumberValidator setTheftNo(String theftNo) {
+    this.theftNo = theftNo;
     return this;
   }
 
@@ -26,6 +32,10 @@ public class StubCardNumberValidator extends CardNumberValidator {
     if (Objects.nonNull(invalidNo) && invalidNo.equals(cardNumber)) {
       return CardValidity.INVALID;
     }
+    if (Objects.nonNull(theftNo) && theftNo.equals(cardNumber)) {
+      return CardValidity.THEFT;
+    }
+
     return CardValidity.VALID;
   }
 }

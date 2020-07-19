@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.psawesome.tdd.chap07.testDouble.CardValidity.INVALID;
+import static org.psawesome.tdd.chap07.testDouble.CardValidity.THEFT;
 
 /**
  * @author ps [https://github.com/wiv33/practice-tdd]
@@ -37,5 +38,15 @@ public class AutoDebitRegister_Stub_Test {
     final RegisterResult result = this.register.register(req);
     assertEquals(INVALID, result.getValidity());
 //    assertEquals(ERROR, result.getValidity());
+  }
+
+  @Test
+  void testTheftCard() {
+    stubValidator.setTheftNo("1234567812345678");
+
+    final AutoDebitReq req = new AutoDebitReq("ps2", "1234567812345678");
+    final RegisterResult result = this.register.register(req);
+    assertEquals(THEFT, result.getValidity());
+
   }
 }
