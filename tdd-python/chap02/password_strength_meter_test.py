@@ -24,6 +24,12 @@ class PasswordStrengthMeterTest(unittest.TestCase):
     def test_meets_other_criteria_expect_for_number_then_normal(self):
         self.assertStrength("ab!@ABqw", _PasswordStrength().NORMAL)
 
+    def test_null_input_then_invalid(self):
+        self.assertStrength(None, _PasswordStrength().INVALID)
+
+    def test_empty_input_then_invalid(self):
+        self.assertStrength("", _PasswordStrength().INVALID)
+
     def assertStrength(self, password, expected):
         actual = self.meter.meter(password)
         self.assertEqual(expected, actual)

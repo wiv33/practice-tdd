@@ -4,6 +4,9 @@ from _password_strength import _PasswordStrength
 class PasswordStrengthMeter:
     @staticmethod
     def meter(s):
+        if s is None or len(s) < 1:
+            return _PasswordStrength().INVALID
+
         if len(s) < 8:
             return _PasswordStrength().NORMAL
 

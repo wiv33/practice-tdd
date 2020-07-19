@@ -16,3 +16,7 @@ class _PasswordStrength:
     @constant
     def NORMAL(self):
         return "NORMAL"
+
+    @constant
+    def INVALID(self):
+        return "INVALID"
