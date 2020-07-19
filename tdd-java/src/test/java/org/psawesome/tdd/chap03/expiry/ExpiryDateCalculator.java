@@ -1,4 +1,4 @@
-package org.psawesome.tdd.chap03._00_expiry;
+package org.psawesome.tdd.chap03.expiry;
 
 import java.time.LocalDate;
 import java.time.YearMonth;

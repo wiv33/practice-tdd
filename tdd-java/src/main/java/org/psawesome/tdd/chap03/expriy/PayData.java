@@ -1,4 +1,4 @@
-package org.psawesome.tdd.chap03._00_expiry;
+package org.psawesome.tdd.chap03.expriy;
 
 import java.time.LocalDate;
 
@@ -11,7 +11,7 @@ import java.time.LocalDate;
  * output:
  * }
  * @see
- * @since 20. 7. 18. Saturday
+ * @since 20. 7. 19. Sunday
  */
 public class PayData {
 
