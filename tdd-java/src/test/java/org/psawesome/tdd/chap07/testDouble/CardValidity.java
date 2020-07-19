@@ -12,7 +12,5 @@ package org.psawesome.tdd.chap07.testDouble;
  * @since 20. 7. 19. Sunday
  */
 public enum CardValidity {
-  VALID,
-  INVALID,
-  EXPIRED, THEFT, UNKNOWN, ERROR
+  INVALID, ERROR, EXPIRED, UNKNOWN, THEFT, VALID
 }

@@ -37,3 +37,4 @@ public class AutoDebitRegister {
     return RegisterResult.success();
   }
 }
+

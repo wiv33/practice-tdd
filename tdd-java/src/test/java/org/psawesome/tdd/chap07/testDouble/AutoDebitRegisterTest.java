@@ -21,15 +21,14 @@ import static org.psawesome.tdd.chap07.testDouble.CardValidity.VALID;
 class AutoDebitRegisterTest {
 
   private AutoDebitRegister register;
-  private StubCardNumberValidator stubValidator;
-  private StubAutoDebitInfoRepository stubRepository;
+  CardNumberValidator validator;
+  JpaAutoDebitInfoRepository stubRepository;
 
   @BeforeEach
   void setUp() {
-//    CardNumberValidator validator = new StubCardNumberValidator();
-    stubValidator = new StubCardNumberValidator();
-    stubRepository = new StubAutoDebitInfoRepository();
-    register = new AutoDebitRegister(stubValidator, stubRepository);
+    validator = new CardNumberValidator();
+    stubRepository = new JpaAutoDebitInfoRepository();
+    register = new AutoDebitRegister(validator, stubRepository);
   }
 
   @Test

@@ -11,6 +11,7 @@ package org.psawesome.tdd.chap07.testDouble;
  * @see
  * @since 20. 7. 19. Sunday
  */
+
 public class JpaAutoDebitInfoRepository implements AutoDebitInfoRepository {
   @Override
   public void save(AutoDebitInfo info) {
